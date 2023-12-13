@@ -1,0 +1,13 @@
+class Solution {
+    long countStrings(int n) {
+        // code here
+        long mod = 1000000007;
+        long lastNumwithZero = 1, lastNumwithOnes = 1, currentNumwithZero = 0;
+        for (int i = 1; i <= n; i++) {
+            currentNumwithZero = (lastNumwithZero + lastNumwithOnes) % mod;
+            lastNumwithOnes = lastNumwithZero;
+            lastNumwithZero = currentNumwithZero;
+        }
+        return currentNumwithZero;
+    }
+}
