@@ -1,26 +1,33 @@
 class Solution{
     static int minValue(String s, int k){
         // code here
-        int arr[] = new int[26];
-        for(int i=0; i<s.length(); i++){
-            char ch = s.charAt(i);
-            int idx = ch - 'a';
-            arr[idx]++;
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i =0;i<s.length();i++) {
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
         }
-        int j = arr.length;
-        for(int i=0; i<k; i++){
-            Arrays.sort(arr);
-            if(k>0){
-                arr[j-1]--;
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(Character c: map.keySet()) {
+            pq.add(map.get(c));
+        }
+        
+        int count = 0;
+        while(count!=k) {
+            int num = pq.remove();
+            num--;
+            if(num>0) {
+                pq.add(num);
             }
+            count++;
         }
+        
         int sum = 0;
-        for(int i=0; i<arr.length; i++){
-            if(arr[i] > 0){
-                sum += arr[i]*arr[i];
-            }
+        
+        while(!pq.isEmpty()) {
+            sum+= (int)Math.pow(pq.remove(),2);
         }
+        
         return sum;
     }
 }
-
