@@ -1,1 +1,1 @@
-# Love-Babbar-Sheet
+# GFG PROBLEM OF THE DAY [POTD]
